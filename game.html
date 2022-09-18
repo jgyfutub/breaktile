@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="shar" style="background-color:white">
+    <div id="first">score:0</div>
+    <br />
+    <a href="file:///C:/Users/Acer/Desktop/games.html">
+    <button class="exit">Back to<br/> home page</button>
+     </a>
+    <div id="second" style="transform:translate(500px,550px)"></div>
+    <br />
+    <button id="third" style="transform:translate(500px,540px)" ></button>
+    <br />
+    <!-- <py-script>print("hello")</py-script> -->
+    <div align="left">
+        <button id="frf">←</button>
+        <button id="rfr">→</button>
+    </div>
+    <!-- <link rel="stylesheet" href="game.css"> -->
+    <style>
+        .exit{
+            position: fixed;
+            transform:translate(1200px,0px);
+            height:70px;
+            width:200px;
+            border-radius: 20px;
+            opacity:60%;
+            background-color:black;
+            color:white;
+            font-size: 20px;
+            font-family: sans-serif;
+            box-shadow: 6px 6px 3px 3px blueviolet;
+        }
+        .exit:hover{
+            opacity:100%;
+            background-color:white;
+            color:black;
+            box-shadow: 10px 10px 5px 5px grey;
+        }
+        #first {
+    position:fixed;
+    height: 100px;
+    width: 1600px;
+    color: #FFF;
+    background-color: blueviolet;
+    transform: translate(0px,0px);
+    font-size: 100px;
+    font-family:sans-serif;
+    color:black;
+}
+#second {
+    position:fixed;
+     
+    height: 30px;
+    width: 30px;
+    color: #FFF;
+    border-radius: 15px;
+background-color: red;
+/* transform: translate(100px,100px); */
+}
+#third{position:fixed;
+
+height: 30px;
+width: 130px;
+color: #FFF;
+background-color: silver;
+border-radius:15px;
+
+}
+#frf{
+    width: 150px;
+    height:100px;
+    background-color: gray;
+    font-size: 80px;
+    color:black;
+    border-radius: 50px;
+    opacity:60%;
+    transform:translate(550px,560px);
+}
+#rfr{
+    width: 150px;
+    height:100px;
+    background-color: gray;
+    font-size:80px;
+    color:black;
+    border-radius: 50px;
+    opacity:60%;
+    transform:translate(550px,560px);
+}
+rfr:hover{
+   background-color: black;
+   color:white;
+}
+frf:hover{
+    background-color: black;
+    color:white;
+ }
+    </style>
+    <script>
+        // function getRandomInt(min,max){
+        // return (Math.random()*(min))+max;}
+        window.onload=function(){
+        var shar=document.getElementById("shar");
+        var first=document.getElementById("first");
+        var frf=document.getElementById("frf");
+        var third=document.getElementById("third");
+        var second=document.getElementById("second");
+        var t=Date.now();
+        var h=500;
+        var x=100;
+        var dir=1;
+        var sir=0;
+        var lir=0;
+        var bir=1;
+        var fir=1;
+        var kir=1;
+        var x=540;
+        var z=550;
+        var a=15*Math.random()+15;
+        var b=10*Math.random()+25;
+        var s=0;
+        var clicked=false;
+        frf.onmousedown=function(){
+             sir=1;
+        }
+        frf.ontouchstart=function(){
+            sir=1;
+        }
+        frf.onmouseup=function(){
+            sir=0;
+        }
+        frf.ontouchend=function(){
+            sir=0;
+        }
+        
+        rfr.onmousedown=function(){
+             lir=1;
+        }
+        rfr.ontouchstart=function(){
+            lir=1;
+        }
+        rfr.onmouseup=function(){
+            lir=0;
+        }
+        rfr.ontouchend=function(){
+            lir=0;
+        }
+        function draw(){
+            var timePassed=(Date.now()-t)/1000;
+            t=Date.now();
+            var gr=third.addEventListener('click',buttonclick);
+            function buttonclick(e){
+                if(!clicked){
+                    clicked=true;
+                }
+            }
+            if (sir==1 ){
+                if (h<=-50){
+                    h=1500;
+                }
+                h=h-x*timePassed;
+                // console.log(h);
+                third.style.transform='translate('+h+'px'+','+'550px)';
+                second.style.transform='translate('+h+'px'+','+'540px)';
+            }
+            if (lir==1){
+                if(h>=1500){
+                    h=-50;
+                }
+                h=h+x*timePassed;
+                third.style.transform='translate('+h+'px'+','+'550px)';
+                second.style.transform='translate('+h+'px'+','+'540px)';
+            }
+            if(clicked){
+                x=x-a*bir;
+                z=z-b*fir*kir;
+                shar.style.backgroundColor="rgb("+Math.abs(x)/3+","+Math.abs(z)/6+","+Math.abs(h)/6+")";
+                second.style.transform='translate('+z+'px'+','+x+'px)';
+                // console.log(x);
+                if(x<100){
+                     bir=bir*(-1);    
+                }
+                if(z<-30 || z>1500){
+                    fir=fir*(-1);
+                }
+                if ((z>h && z<140+h)&&(x>540 )&& bir==-1 &&(sir==1 || sir==0)&&(lir==1||lir==0)){
+                    bir=bir*(-1); 
+                    s=s+1;
+                    first.innerHTML="score:"+s;
+                }
+                if(x>600){
+                    alert("game over\n and your score:"+s);
+                    s=0;
+                    kir*=-1;
+                    clicked=false;
+                    h=500;
+                    x=540;
+                    dir=1;
+                    sir=0;
+                    lir=0;
+                    bir=1;
+                    fir=1;
+                    z=550;
+                    a=15*Math.random()+4;
+                    b=10*Math.random()+4;
+                    third.style.transform='translate('+h+'px'+','+'550px)';
+                    second.style.transform='translate('+h+'px'+','+'540px)';
+                    first.innerHTML="score:"+s;
+                }
+            }
+        }
+        setInterval(draw,50);
+    }
+    </script>
+</body>
+</html>
